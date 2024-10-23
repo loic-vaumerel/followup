@@ -1,10 +1,15 @@
 <?php
   declare (strict_types = 1);
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
   // require_once ("model/DBManager.php");
   // require_once ("settings/db.php");
 
   // require_once ("model/DBManager.php");
+  require_once ("./settings/db.php");
   require_once ("./model/DBManagerRO.php");
   require_once ("./model/DBManagerRW.php");
 
@@ -15,27 +20,47 @@
   $v_dbm_ro = new DBManagerRO ();
   $v_dbm_rw = new DBManagerRW ();
 
-  // echo ("<hr>");
-  // $v_result = $v_dbm_ro->readUser ("UT_0001");
-  // echo ("<pre>"); print_r ($v_result); echo ("<pre>");
-
   echo ("<hr>");
-  $v_dbm_rw->deleteUser ((int)$v_dbm_ro->readUser ("UT_0001")[0]["id"]);
-  $v_dbm_rw->deleteUser ((int)$v_dbm_ro->readUser ("UT_0002")[0]["id"]);
-  $v_dbm_rw->deleteUser ((int)$v_dbm_ro->readUser ("UT_0003")[0]["id"]);
+  $v_dbm_rw->deleteUserByName ("UT_0001");
+  $v_dbm_rw->deleteUserByName ("UT_0002");
+  $v_dbm_rw->deleteUserByName ("UT_0003");
+  $v_dbm_rw->deleteUserByName ("UT_0004");
+  $v_dbm_rw->deleteUserByName ("UT_0005");
   print_array ($v_dbm_ro->listAllUsers ());
 
   echo ("<hr>");
   $v_dbm_rw->createUser ('UT_0001', "ut_0001@email.com");
   $v_dbm_rw->createUser ('UT_0002', "ut_0002@email.com");
   $v_dbm_rw->createUser ('UT_0003', "ut_0003@email.com");
+  $v_dbm_rw->createUser ('UT_0004', "ut_0004@email.com");
+  $v_dbm_rw->createUser ('UT_0005', "ut_0005@email.com");
   print_array ($v_dbm_ro->listAllUsers ());
 
   echo ("<hr>");
-  $v_dbm_rw->activateUser ((int)$v_dbm_ro->readUser ("UT_0001")[0]["id"]);
-  $v_dbm_rw->activateUser ((int)$v_dbm_ro->readUser ("UT_0002")[0]["id"]);
-  $v_dbm_rw->deactivateUser ((int)$v_dbm_ro->readUser ("UT_0002")[0]["id"]);
+  $v_id = $v_dbm_ro->readUserByName ("UT_0001")[0]["id"];
+  $v_dbm_rw->setUserPasswordById ($v_id, "password1");
+  $v_id = $v_dbm_ro->readUserByName ("UT_0002")[0]["id"];
+  $v_dbm_rw->setUserPasswordById ($v_id, "password2");
+  $v_id = $v_dbm_ro->readUserByName ("UT_0003")[0]["id"];
+  $v_dbm_rw->setUserPasswordById ($v_id, "password3");
+  $v_dbm_rw->setUserPasswordByName ("UT_0004", "password4");
+  $v_dbm_rw->setUserPasswordByName ("UT_0005", "password5");
   print_array ($v_dbm_ro->listAllUsers ());
+
+  echo ("<hr>");
+  $v_id = $v_dbm_ro->readUserByName ("UT_0002")[0]["id"];
+  $v_dbm_rw->activateUserById ($v_id);
+  $v_id = $v_dbm_ro->readUserByName ("UT_0003")[0]["id"];
+  $v_dbm_rw->activateUserById ($v_id);
+  $v_dbm_rw->deactivateUserById ($v_id);
+  $v_dbm_rw->activateUserByName ("UT_0004");
+  $v_dbm_rw->activateUserByName ("UT_0005");
+  $v_dbm_rw->deactivateUserByName ("UT_0005");
+  print_array ($v_dbm_ro->listAllUsers ());
+
+
+  print_array ($v_dbm_ro->readUserById (-1));
+  print_array ($v_dbm_ro->readUserByName ("UT_0001"));
 
   // echo ("<hr>");
   // $v_dbm_rw->deleteUser ((int)$v_dbm_ro->readUser ("UT_0001")[0]["id"]);

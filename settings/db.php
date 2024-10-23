@@ -1,5 +1,5 @@
 <?php
-  define ('DB_HOSTNAME'   , '172.17.0.1');
+  define ('DB_HOSTNAME'   , '127.0.0.1');
   define ('DB_DBNAME'     , 'followup');
   define ('DB_USERNAME_RO', 'followup_ro');
   define ('DB_PASSWORD_RO', 'password');
