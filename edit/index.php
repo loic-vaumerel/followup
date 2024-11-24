@@ -19,7 +19,7 @@
         switch ($v_action) {
             case 'do_logout':
                 unset ($_SESSION ['logged_in_username']);
-                header ('Location:?action=goto_login');
+                header ('Location:?action=goto_login'); // TO REPLACE
                 break;
             // case 'do_create_person':
             //     break;
@@ -29,18 +29,24 @@
             //     break;
         }
         if (is_null ($v_action) || !str_starts_with ($v_action, 'goto_')) {
-            header ('Location:?action=goto_main');
+            header ('Location:?action=goto_main'); // TO REPLACE
             // $v_action = 'goto_main';
         }
     } else {
         switch ($v_action) {
             case 'do_login':
-                $v_username = f_safe_read_array_item ($_POST, 'username');
-                $v_password = f_safe_read_array_item ($_POST, 'password');
-                $v_db_user = $v_dbm_ro->readUserByName ($v_username);
-                if (password_verify ($v_password, $v_db_user [0]['password'])) {
-                    $_SESSION ['logged_in_username'] = $v_username;
-                    header ('Location:?action=goto_main');
+                $v_post_username = f_safe_read_array_item ($_POST, 'username');
+                $v_post_password = f_safe_read_array_item ($_POST, 'password');
+                $v_db_user = $v_dbm_ro->readUserByName ($v_post_username);
+                $v_db_user_password = null;
+                if (isset ($v_db_user [0])) {
+                    $v_db_user_password = $v_db_user [0]['password'];
+                    $v_db_user_admin = $v_db_user [0]['admin'];
+                }
+                if (!is_null ($v_post_password ) && !is_null ($v_db_user_password) && password_verify ($v_post_password, $v_db_user_password)) {
+                    $_SESSION ['logged_in_username'] = $v_post_username;
+                    $_SESSION ['logged_in_is_admin'] = $v_db_user_admin;
+                    header ('Location:?action=goto_main'); // TO REPLACE
                     // echo ('OK');
                 } else {
                     unset ($_SESSION ['logged_in_username']);
