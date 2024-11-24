@@ -19,6 +19,7 @@
         switch ($v_action) {
             case 'do_logout':
                 unset ($_SESSION ['logged_in_username']);
+                unset ($_SESSION ['logged_in_is_admin']);
                 header ('Location:?action=goto_login'); // TO REPLACE
                 break;
             // case 'do_create_person':
