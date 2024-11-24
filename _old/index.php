@@ -62,6 +62,13 @@ error_reporting(E_ALL);
   print_array ($v_dbm_ro->readUserById (-1));
   print_array ($v_dbm_ro->readUserByName ("UT_0001"));
 
+  $v_dbm_rw->deleteUserByName ("UT_0001");
+  $v_dbm_rw->deleteUserByName ("UT_0002");
+  $v_dbm_rw->deleteUserByName ("UT_0003");
+  $v_dbm_rw->deleteUserByName ("UT_0004");
+  $v_dbm_rw->deleteUserByName ("UT_0005");
+ 
+
   // echo ("<hr>");
   // $v_dbm_rw->deleteUser ((int)$v_dbm_ro->readUser ("UT_0001")[0]["id"]);
   // $v_dbm_rw->deleteUser ((int)$v_dbm_ro->readUser ("UT_0002")[0]["id"]);

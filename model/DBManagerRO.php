@@ -1,8 +1,6 @@
 <?php
   declare (strict_types = 1);
 
-  require_once ('./model/DBManager.php');
-
   class DBManagerRO {
     private $iv_db_manager = null;
 
