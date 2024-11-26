@@ -1,0 +1,50 @@
+<div id="dev_links">
+<hr>
+<hr>
+<a href=".">Main</a>
+ - 
+<a href="?action=goto_users">Users</a>
+ - 
+<a href="?action=goto_create_user">Create User</a>
+ - 
+<a href="?action=goto_types">Types</a>
+ - 
+<a href="?action=goto_persons">Persons</a>
+ - 
+ <?php
+ if ($v_action == "goto_login") {
+?>
+<hr>
+Change login user
+<a href="#" onClick="document.getElementsByName ('username')[0].value = 'admin';document.getElementsByName ('password')[0].value = 'password';">admin</a>
+-
+<a href="#" onClick="document.getElementsByName ('username')[0].value = 'user1';document.getElementsByName ('password')[0].value = 'password';">user1</a>
+-
+<hr>
+<?php
+ }
+?>
+<?php
+if ($v_action == "goto_create_user") {
+?>
+<hr>
+Fill Create User
+<a href="#" onClick="document.getElementsByName ('name')[0].value = 'MyUser1';document.getElementsByName ('email')[0].value = 'myuser1@email.com';document.getElementsByName ('password')[0].value = 'password';document.getElementsByName ('active')[0].value = 0;document.getElementsByName ('admin')[0].value = 0;">MyUser1</a>
+-
+<a href="#" onClick="document.getElementsByName ('name')[0].value = 'MyUser2';document.getElementsByName ('email')[0].value = 'myuser2@email.com';document.getElementsByName ('password')[0].value = 'password';document.getElementsByName ('active')[0].value = 1;document.getElementsByName ('admin')[0].value = 0;">MyUser2</a>
+-
+<a href="#" onClick="document.getElementsByName ('name')[0].value = 'MyUser3';document.getElementsByName ('email')[0].value = 'myuser3@email.com';document.getElementsByName ('password')[0].value = 'password';document.getElementsByName ('active')[0].value = 1;document.getElementsByName ('admin')[0].value = 1;">MyUser3</a>
+-
+<hr>
+<?php
+}
+?>
+<hr>
+</div>
+<style>
+    div#dev_links {
+        position:absolute;
+        right:1em;
+        bottom:1em;
+    }
+</style>

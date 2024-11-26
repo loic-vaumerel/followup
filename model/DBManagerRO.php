@@ -30,5 +30,12 @@
       $v_parameters = array ();
       return $this->iv_db_manager->getQueryResult ($v_sql, $v_parameters);
     }
+
+    public function listAllPersons (): array {
+      $v_sql = "SELECT *
+                  from person";
+      $v_parameters = array ();
+      return $this->iv_db_manager->getQueryResult ($v_sql, $v_parameters);
+    }
   }
 ?>

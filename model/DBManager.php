@@ -77,5 +77,14 @@
     public function isConnected (): bool {
       return !is_null ($this->iv_db_connection);
     }
+  
+    public function getLastInsertedId (): int {
+      try {
+        return intval ($this->iv_db_connection->lastInsertId ());
+      } catch (PDOException $e) {
+        $this->iv_message = $e->getMessage();
+        throw ($e);
+      }
+    }
   }
 ?>

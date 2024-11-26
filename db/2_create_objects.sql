@@ -1,5 +1,4 @@
 drop table if exists followup.action_category;
-drop table if exists followup.category;
 drop table if exists followup.action;
 drop table if exists followup.type_position;
 drop table if exists followup.type_action_category;
@@ -74,6 +73,9 @@ create table followup.action (
   constraint action_fk_type_position_id foreign key (type_position_id) references type_position (id)
 );
 
+delete from followup.	user where id = 1;
+insert into followup.user values (1, 'admin', null, '$2y$10$XDswkxVmW1ywTG2l40.PCObX1JpjuIbLanq/XHLf0s50fctONK/TW', 1, 1);
+
 -- insert into followup.user values (1, 'admin', null, 'NOT_INITIALIZED', true, true);
 -- insert into followup.user values (null, 'user1', null, 'NOT_INITIALIZED', false, true);
 -- 
@@ -127,7 +129,10 @@ select ta.id, concat (g.name, ' ', ta.name, ' ', r.name) as action_name, GROUP_C
  order by g.name, ta.name, r.name;
 
 
-/*drop table if exists followup.data_event;
+/*drop table if exidelete from followup.user where id = 1;
+
+insert into followup.user values (1, 'admin', null, '$2y$10$XDswkxVmW1ywTG2l40.PCObX1JpjuIbLanq/XHLf0s50fctONK/TW', 1, 1);
+sts followup.data_event;
 drop table if exists followup.type_action;
 drop table if exists followup.type_constraint;
 drop table if exists followup.type_event;
