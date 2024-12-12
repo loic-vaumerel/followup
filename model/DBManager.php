@@ -1,5 +1,6 @@
 <?php
   declare (strict_types = 1);
+  if (!isset ($GLOBALS ['SAFE_REQUIRE_ONCE'])) exit (0);
 
   class DBManager {
     private $iv_db_connection = null;

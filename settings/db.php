@@ -1,4 +1,6 @@
 <?php
+  if (!isset ($GLOBALS ['SAFE_REQUIRE_ONCE'])) exit (0);
+
   define ('DB_HOSTNAME'   , '127.0.0.1');
   define ('DB_DBNAME'     , 'followup');
   define ('DB_USERNAME_RO', 'followup_ro');

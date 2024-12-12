@@ -1,0 +1,38 @@
+div.modal_change_dialog_container * {
+    padding: 0;
+    margin: 0;
+}
+div.modal_change_dialog_container {
+    background-color: rgba(0,0,0,80%);
+    position: fixed;
+    top:0;
+    left:0;
+    height:100vh;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+div.modal_change_dialog_container > div.modal_change_dialog {
+    background-color: rgba(255,255,255,100%);
+    padding:1em;
+}
+
+div.modal_change_dialog_container > div.modal_change_dialog > form {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+
+div.modal_change_dialog_container > div.modal_change_dialog input {
+    margin:0 1em 1em 1em;
+    padding:1em;
+}
+
+div.modal_change_dialog_container > div.modal_change_dialog > form > input {
+    width:100%;
+}
+div.modal_change_dialog_container > div.modal_change_dialog > form > div {
+    width:100%;
+    margin:0 1em 1em 1em;
+}

@@ -5,7 +5,7 @@
  - 
 <a href="?action=goto_users">Users</a>
  - 
-<a href="?action=goto_create_user">Create User</a>
+<a href="?action=goto_user_create">Create User</a>
  - 
 <a href="?action=goto_types">Types</a>
  - 
@@ -20,12 +20,18 @@ Change login user
 -
 <a href="#" onClick="document.getElementsByName ('username')[0].value = 'user1';document.getElementsByName ('password')[0].value = 'password';">user1</a>
 -
+<a href="#" onClick="document.getElementsByName ('username')[0].value = 'user2';document.getElementsByName ('password')[0].value = 'password';">user2</a>
+-
+<a href="#" onClick="document.getElementsByName ('username')[0].value = 'user3';document.getElementsByName ('password')[0].value = 'password';">user3</a>
+-
+<a href="#" onClick="document.getElementsByName ('username')[0].value = 'user4';document.getElementsByName ('password')[0].value = 'password';">user4</a>
+-
 <hr>
 <?php
  }
 ?>
 <?php
-if ($v_action == "goto_create_user") {
+if ($v_action == "goto_user_create") {
 ?>
 <hr>
 Fill Create User

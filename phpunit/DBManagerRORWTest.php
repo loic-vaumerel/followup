@@ -3,9 +3,9 @@
 
   use PHPUnit\Framework\TestCase;
 
-  require_once ("./phpunit/settings/db.php");
-  require_once ("./model/DBManagerRO.php");
-  require_once ("./model/DBManagerRW.php");
+  f_safe_require_once ("./phpunit/settings/db.php");
+  f_safe_require_once ("./model/DBManagerRO.php");
+  f_safe_require_once ("./model/DBManagerRW.php");
   // require_once ("DBTestCase.php");
 
   final class DBManagerRORWTest extends TestCase {

@@ -1,3 +1,5 @@
+<?php if (!isset ($GLOBALS ['SAFE_REQUIRE_ONCE'])) header ("Location:../?action=goto_main"); ?>
+
 <link rel="stylesheet" href="view/global.css">
 
 <style>

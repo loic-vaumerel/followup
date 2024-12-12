@@ -1,16 +1,12 @@
+<?php if (!isset ($GLOBALS ['SAFE_REQUIRE_ONCE'])) exit (0); ?>
+
 <link rel="stylesheet" href="view/global.css">
 
 <div class="flex_col">
     <h1>Settings</h1>
-    <div id="toolbar">
-        <form method="post" action="?action=goto_main">
-            <input type="submit" value="Main">
-        </form>
-        <form method="post" action="?action=do_logout">
-            <input type="submit" value="Logout">
-        </form>
-    </div>
-    <div class="flex_central_menu">
+    <?php generate_toolbar (["Main", "Settings"], [], ["Logout"]); ?>
+    <!-- <div class="flex_central_menu"> -->
+    <div class="flex_col central_menu">
         <form method="post" action="?action=goto_users">
             <input type="submit" value="Credentials - Users">
         </form>

@@ -1,5 +1,6 @@
 <?php
   declare (strict_types = 1);
+  if (!isset ($GLOBALS ['SAFE_REQUIRE_ONCE'])) exit (0);
 
   class DBManagerRW {
     private $iv_db_manager = null;
@@ -154,6 +155,45 @@
 
     public function deletePerson (int $p_id): void {
       $v_sql  = "delete from person where id = :param_id";
+
+      $v_parameters = array ();
+      array_push ($v_parameters, array ("param_id", $p_id, PDO::PARAM_INT));
+
+      $this->iv_db_manager->executeQuery ($v_sql, $v_parameters);
+    }
+
+    /************
+     * POSITION
+     ************/
+
+    // Create position
+
+    public function createPosition (string $p_name): void {
+      $v_sql  = "insert into type_position (name) ";
+      $v_sql .= "            values (:param_name)";
+
+      $v_parameters = array ();
+      array_push ($v_parameters, array ("param_name", strip_tags ($p_name), PDO::PARAM_STR));
+
+      $this->iv_db_manager->executeQuery ($v_sql, $v_parameters);
+    }
+
+    // Set name
+
+    public function setPositionName (int $p_id, string $p_name): void {
+      $v_sql  = "update type_position set name = :param_name where id = :param_id";
+
+      $v_parameters = array ();
+      array_push ($v_parameters, array ("param_id"  , $p_id  , PDO::PARAM_INT));
+      array_push ($v_parameters, array ("param_name", $p_name, PDO::PARAM_STR));
+
+      $this->iv_db_manager->executeQuery ($v_sql, $v_parameters);
+    }
+
+    // Delete position
+
+    public function deletePosition (int $p_id): void {
+      $v_sql  = "delete from type_position where id = :param_id";
 
       $v_parameters = array ();
       array_push ($v_parameters, array ("param_id", $p_id, PDO::PARAM_INT));
