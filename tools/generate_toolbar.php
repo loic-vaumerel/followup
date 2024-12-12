@@ -10,6 +10,8 @@
                        "Create Person"   => "?action=goto_person_create",
                        "Positions"       => "?action=goto_positions",
                        "Create Position" => "?action=goto_position_create",
+                       "Categories"      => "?action=goto_categories",
+                       "Create Category" => "?action=goto_category_create",
                        "Logout"          => "?action=do_logout"];
 
         e (0, "<div id=\"toolbar\">");

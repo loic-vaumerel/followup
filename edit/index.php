@@ -250,6 +250,60 @@
 
                 header ('Location:?action=goto_positions');
                 break;
+            case 'do_category_create':
+                if ($_SESSION ['logged_in_is_admin'] == 1) {
+                    $v_dbm_rw = new DBManagerRW ();
+                } else {
+                    array_push ($_SESSION ['error_messages'], "Category creation failed ! " . $_SESSION ['logged_in_username'] . " is not admin !");
+                    header ('Location:?action=goto_categories');
+                }
+
+                $v_name = f_safe_read_array_item ($_POST, 'name');
+
+                $v_id = $v_dbm_rw->createCategory ($v_name);
+
+                unset ($v_name);
+                unset ($v_id);
+                unset ($v_dbm_rw);
+
+                header ('Location:?action=goto_categories');
+                break;
+            case 'do_category_edit':
+                if ($_SESSION ['logged_in_is_admin'] == 1) {
+                    $v_dbm_rw = new DBManagerRW ();
+                } else {
+                    array_push ($_SESSION ['error_messages'], "Category update failed ! " . $_SESSION ['logged_in_username'] . " is not admin !");
+                    header ('Location:?action=goto_categories');
+                }
+
+                $v_id = intval (f_safe_read_array_item ($_POST, 'id'));
+                $v_name = f_safe_read_array_item ($_POST, 'name');
+
+                $v_dbm_rw->setCategoryName ($v_id, $v_name);
+
+                unset ($v_name);
+                unset ($v_id);
+                unset ($v_dbm_rw);
+
+                header ('Location:?action=goto_categories');
+                break;
+            case 'do_category_delete':
+                if ($_SESSION ['logged_in_is_admin'] == 1) {
+                    $v_dbm_rw = new DBManagerRW ();
+                } else {
+                    array_push ($_SESSION ['error_messages'], "Category deletion failed ! " . $_SESSION ['logged_in_username'] . " is not admin !");
+                    header ('Location:?action=goto_categories');
+                }
+
+                $v_id = intval (f_safe_read_array_item ($_POST, 'id'));
+
+                $v_dbm_rw->deleteCategory ($v_id);
+
+                unset ($v_id);
+                unset ($v_dbm_rw);
+
+                header ('Location:?action=goto_categories');
+                break;
         }
     } else { // not loggued in
         switch ($v_action) {
@@ -336,6 +390,18 @@
             break;
         case 'goto_position_delete':
             f_safe_require_once ('view/position_delete.php');
+            break;
+        case 'goto_categories':
+            f_safe_require_once ('view/categories.php');
+            break;
+        case 'goto_category_create':
+            f_safe_require_once ('view/category_create_edit.php');
+            break;
+        case 'goto_category_edit':
+            f_safe_require_once ('view/category_create_edit.php');
+            break;
+        case 'goto_category_delete':
+            f_safe_require_once ('view/category_delete.php');
             break;
         default:
             f_safe_require_once ('view/main.php');

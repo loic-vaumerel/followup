@@ -38,11 +38,9 @@ create table followup.type_action (
 
 create table followup.type_category (
   id bigint not null auto_increment,
-  person_id bigint not null,
   name text not null,
   constraint type_category_pk primary key (id),
   constraint type_category_uk_name unique (name),
-  constraint type_category_fk_person_id foreign key (person_id) references followup.person (id)
 );
 
 create table followup.type_action_category (
@@ -73,7 +71,7 @@ create table followup.action (
   constraint action_fk_type_position_id foreign key (type_position_id) references type_position (id)
 );
 
-delete from followup.	user where id = 1;
+delete from followup.user where id = 1;
 insert into followup.user values (1, 'admin', null, '$2y$10$XDswkxVmW1ywTG2l40.PCObX1JpjuIbLanq/XHLf0s50fctONK/TW', 1, 1);
 
 -- insert into followup.user values (1, 'admin', null, 'NOT_INITIALIZED', true, true);

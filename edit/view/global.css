@@ -171,6 +171,14 @@ div#positions > div:nth-child(-n+3) {
     font-weight:bold;
 }
 
+div#categories {
+    grid-template-columns: auto 1fr auto;
+}
+div#categories > div:nth-child(-n+3) {
+    background-color:lightgrey;
+    font-weight:bold;
+}
+
 
 div.error_message {
     border:solid 1px red;

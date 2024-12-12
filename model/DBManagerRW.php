@@ -201,5 +201,44 @@
       $this->iv_db_manager->executeQuery ($v_sql, $v_parameters);
     }
 
+    /************
+     * CATEGORY
+     ************/
+
+    // Create category
+
+    public function createCategory (string $p_name): void {
+      $v_sql  = "insert into type_category (name) ";
+      $v_sql .= "            values (:param_name)";
+
+      $v_parameters = array ();
+      array_push ($v_parameters, array ("param_name", strip_tags ($p_name), PDO::PARAM_STR));
+
+      $this->iv_db_manager->executeQuery ($v_sql, $v_parameters);
+    }
+
+    // Set name
+
+    public function setCategoryName (int $p_id, string $p_name): void {
+      $v_sql  = "update type_category set name = :param_name where id = :param_id";
+
+      $v_parameters = array ();
+      array_push ($v_parameters, array ("param_id"  , $p_id  , PDO::PARAM_INT));
+      array_push ($v_parameters, array ("param_name", $p_name, PDO::PARAM_STR));
+
+      $this->iv_db_manager->executeQuery ($v_sql, $v_parameters);
+    }
+
+    // Delete category
+
+    public function deleteCategory (int $p_id): void {
+      $v_sql  = "delete from type_category where id = :param_id";
+
+      $v_parameters = array ();
+      array_push ($v_parameters, array ("param_id", $p_id, PDO::PARAM_INT));
+
+      $this->iv_db_manager->executeQuery ($v_sql, $v_parameters);
+    }
+
   }
 ?>

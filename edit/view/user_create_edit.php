@@ -36,8 +36,8 @@
 
     $v_db_user_name = null;
     $v_db_user_email = null;
-    $v_db_user_active_selected_no = "selected=\"selected\"";
-    $v_db_user_active_selected_yes = "";
+    $v_db_user_active_selected_no = "";
+    $v_db_user_active_selected_yes = "selected=\"selected\"";
     $v_db_user_admin_selected_no = "selected=\"selected\"";
     $v_db_user_admin_selected_yes = "";
 }

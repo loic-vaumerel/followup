@@ -41,6 +41,14 @@
       return $this->iv_db_manager->getQueryResult ($v_sql, $v_parameters);
     }
 
+    public function readCategoryById (int $p_id): array {
+      $v_sql = "SELECT *
+                  from type_category
+                 where id = :param_id";
+      $v_parameters = array (array ("param_id", $p_id, PDO::PARAM_INT));
+      return $this->iv_db_manager->getQueryResult ($v_sql, $v_parameters);
+    }
+
     public function listAllUsers (): array {
       $v_sql = "SELECT *
                   from user";
@@ -58,6 +66,13 @@
     public function listAllPositions (): array {
       $v_sql = "SELECT *
                   from type_position";
+      $v_parameters = array ();
+      return $this->iv_db_manager->getQueryResult ($v_sql, $v_parameters);
+    }
+
+    public function listAllCategories (): array {
+      $v_sql = "SELECT *
+                  from type_category";
       $v_parameters = array ();
       return $this->iv_db_manager->getQueryResult ($v_sql, $v_parameters);
     }
