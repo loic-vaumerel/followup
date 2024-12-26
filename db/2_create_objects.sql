@@ -40,7 +40,7 @@ create table followup.type_category (
   id bigint not null auto_increment,
   name text not null,
   constraint type_category_pk primary key (id),
-  constraint type_category_uk_name unique (name),
+  constraint type_category_uk_name unique (name)
 );
 
 create table followup.type_action_category (
@@ -103,6 +103,32 @@ insert into followup.user values (1, 'admin', null, '$2y$10$XDswkxVmW1ywTG2l40.P
 select * from information_schema.tables where table_schema = 'followup';
 select * from information_schema.table_constraints where table_schema = 'followup' or constraint_schema = 'followup';
 
+-- INSERT INTO followup.user (name,email,password,active,admin) VALUES
+-- 	 ('admin',NULL,'$2y$10$XDswkxVmW1ywTG2l40.PCObX1JpjuIbLanq/XHLf0s50fctONK/TW',1,1);
+-- INSERT INTO followup.person (name) VALUES
+-- 	 ('Person 1'),
+-- 	 ('Person 2');
+-- INSERT INTO followup.type_action (giver_id,name,receiver_id) VALUES
+-- 	 (1,'Action 1',2),
+-- 	 (1,'Action 2',2),
+-- 	 (1,'Action 3',1),
+-- 	 (1,'Action 4',1),
+-- 	 (1,'Action 5',1);
+-- INSERT INTO followup.type_category (name) VALUES
+-- 	 ('Category 1'),
+-- 	 ('Category 2'),
+-- 	 ('Category 3'),
+-- 	 ('Category 4');
+-- INSERT INTO followup.type_action_category (type_action_id,type_category_id) VALUES
+-- 	 (1,2),
+-- 	 (8,3),
+-- 	 (8,4),
+-- 	 (9,6),
+-- 	 (10,2),
+-- 	 (10,6);
+-- INSERT INTO followup.type_position (name) VALUES
+-- 	 ('Position 1'),
+-- 	 ('Position 2');
 
 select * from followup.user;
 select * from followup.person;

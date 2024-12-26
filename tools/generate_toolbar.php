@@ -10,6 +10,8 @@
                        "Create Person"   => "?action=goto_person_create",
                        "Positions"       => "?action=goto_positions",
                        "Create Position" => "?action=goto_position_create",
+                       "Actions"         => "?action=goto_actions",
+                       "Create Action"   => "?action=goto_action_create",
                        "Categories"      => "?action=goto_categories",
                        "Create Category" => "?action=goto_category_create",
                        "Logout"          => "?action=do_logout"];

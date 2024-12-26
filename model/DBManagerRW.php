@@ -129,7 +129,7 @@
 
     // Create person
 
-    public function createPerson (string $p_name): void {
+    public function createPerson (string $p_name): int {
       $v_sql  = "insert into person (name) ";
       $v_sql .= "            values (:param_name)";
 
@@ -137,6 +137,8 @@
       array_push ($v_parameters, array ("param_name", strip_tags ($p_name), PDO::PARAM_STR));
 
       $this->iv_db_manager->executeQuery ($v_sql, $v_parameters);
+
+      return $this->iv_db_manager->getLastInsertedId ();
     }
 
     // Set name
@@ -168,7 +170,7 @@
 
     // Create position
 
-    public function createPosition (string $p_name): void {
+    public function createPosition (string $p_name): int {
       $v_sql  = "insert into type_position (name) ";
       $v_sql .= "            values (:param_name)";
 
@@ -176,6 +178,8 @@
       array_push ($v_parameters, array ("param_name", strip_tags ($p_name), PDO::PARAM_STR));
 
       $this->iv_db_manager->executeQuery ($v_sql, $v_parameters);
+
+      return $this->iv_db_manager->getLastInsertedId ();
     }
 
     // Set name
@@ -202,12 +206,106 @@
     }
 
     /************
+     * ACTION
+     ************/
+
+    // Create action
+
+    public function createAction (string $p_name): int {
+      $v_sql  = "insert into type_action (name) ";
+      $v_sql .= "            values (:param_name)";
+
+      $v_parameters = array ();
+      array_push ($v_parameters, array ("param_name", strip_tags ($p_name), PDO::PARAM_STR));
+
+      $this->iv_db_manager->executeQuery ($v_sql, $v_parameters);
+
+      return $this->iv_db_manager->getLastInsertedId ();
+    }
+
+    // Set giver
+
+    public function setActionGiver (int $p_id, int $p_giver_id): void {
+      $v_sql  = "update type_action set giver_id = :param_giver_id where id = :param_id";
+
+      $v_parameters = array ();
+      array_push ($v_parameters, array ("param_id"      , $p_id      , PDO::PARAM_INT));
+      array_push ($v_parameters, array ("param_giver_id", $p_giver_id, PDO::PARAM_INT));
+
+      $this->iv_db_manager->executeQuery ($v_sql, $v_parameters);
+    }
+
+    // Set name
+
+    public function setActionName (int $p_id, string $p_name): void {
+      $v_sql  = "update type_action set name = :param_name where id = :param_id";
+
+      $v_parameters = array ();
+      array_push ($v_parameters, array ("param_id"  , $p_id  , PDO::PARAM_INT));
+      array_push ($v_parameters, array ("param_name", $p_name, PDO::PARAM_STR));
+
+      $this->iv_db_manager->executeQuery ($v_sql, $v_parameters);
+    }
+
+    // Set receiver
+
+    public function setActionReceiver (int $p_id, int $p_receiver_id): void {
+      $v_sql  = "update type_action set receiver_id = :param_receiver_id where id = :param_id";
+
+      $v_parameters = array ();
+      array_push ($v_parameters, array ("param_id"         , $p_id         , PDO::PARAM_INT));
+      array_push ($v_parameters, array ("param_receiver_id", $p_receiver_id, PDO::PARAM_INT));
+
+      $this->iv_db_manager->executeQuery ($v_sql, $v_parameters);
+    }
+    
+    // Delete action
+
+    public function deleteAction (int $p_id): void {
+      $v_sql  = "delete from type_action where id = :param_id";
+
+      $v_parameters = array ();
+      array_push ($v_parameters, array ("param_id", $p_id, PDO::PARAM_INT));
+
+      $this->iv_db_manager->executeQuery ($v_sql, $v_parameters);
+    }
+
+    // Assign category to an action
+
+    public function assignActionCategory (int $p_action_id, int $p_category_id): int {
+      $v_sql  = "insert into type_action_category (type_action_id, type_category_id) ";
+      $v_sql .= "            values (:param_action_id, :param_category_id)";
+
+      $v_parameters = array ();
+      array_push ($v_parameters, array ("param_action_id"  , $p_action_id  , PDO::PARAM_INT));
+      array_push ($v_parameters, array ("param_category_id", $p_category_id, PDO::PARAM_INT));
+
+      $this->iv_db_manager->executeQuery ($v_sql, $v_parameters);
+
+      return $this->iv_db_manager->getLastInsertedId ();
+    }
+
+    // Unassign category from an action
+
+    public function unassignActionCategory (int $p_action_id, int $p_category_id): void {
+      $v_sql  = "delete from type_action_category";
+      $v_sql .= " where type_action_id = :param_action_id";
+      $v_sql .= "   and type_category_id = :param_category_id";
+
+      $v_parameters = array ();
+      array_push ($v_parameters, array ("param_action_id"  , $p_action_id  , PDO::PARAM_INT));
+      array_push ($v_parameters, array ("param_category_id", $p_category_id, PDO::PARAM_INT));
+
+      $this->iv_db_manager->executeQuery ($v_sql, $v_parameters);
+    }
+
+    /************
      * CATEGORY
      ************/
 
     // Create category
 
-    public function createCategory (string $p_name): void {
+    public function createCategory (string $p_name): int {
       $v_sql  = "insert into type_category (name) ";
       $v_sql .= "            values (:param_name)";
 
@@ -215,6 +313,8 @@
       array_push ($v_parameters, array ("param_name", strip_tags ($p_name), PDO::PARAM_STR));
 
       $this->iv_db_manager->executeQuery ($v_sql, $v_parameters);
+
+      return $this->iv_db_manager->getLastInsertedId ();
     }
 
     // Set name

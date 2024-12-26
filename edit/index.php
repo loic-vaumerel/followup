@@ -304,6 +304,125 @@
 
                 header ('Location:?action=goto_categories');
                 break;
+            case 'do_action_create':
+                if ($_SESSION ['logged_in_is_admin'] == 1) {
+                    $v_dbm_rw = new DBManagerRW ();
+                } else {
+                    array_push ($_SESSION ['error_messages'], "Actions creation failed ! " . $_SESSION ['logged_in_username'] . " is not admin !");
+                    header ('Location:?action=goto_actions');
+                }
+
+                $v_giver_id = intval (f_safe_read_array_item ($_POST, 'giver_id'));
+                $v_name = f_safe_read_array_item ($_POST, 'name');
+                $v_receiver_id = intval (f_safe_read_array_item ($_POST, 'receiver_id'));
+
+                $v_id = $v_dbm_rw->createAction ($v_name);
+                $v_dbm_rw->setActionGiver ($v_id, $v_giver_id);
+                $v_dbm_rw->setActionReceiver ($v_id, $v_receiver_id);
+
+                unset ($v_receiver_id);
+                unset ($v_name);
+                unset ($v_giver_id);
+                unset ($v_id);
+                unset ($v_dbm_rw);
+
+                header ('Location:?action=goto_actions');
+                break;
+            case 'do_action_edit':
+                if ($_SESSION ['logged_in_is_admin'] == 1) {
+                    $v_dbm_rw = new DBManagerRW ();
+                } else {
+                    array_push ($_SESSION ['error_messages'], "Actions update failed ! " . $_SESSION ['logged_in_username'] . " is not admin !");
+                    header ('Location:?action=goto_actions');
+                }
+
+                $v_id = intval (f_safe_read_array_item ($_POST, 'id'));
+                $v_giver_id = intval (f_safe_read_array_item ($_POST, 'giver_id'));
+                $v_name = f_safe_read_array_item ($_POST, 'name');
+                $v_receiver_id = intval (f_safe_read_array_item ($_POST, 'receiver_id'));
+
+                $v_dbm_rw->setActionName ($v_id, $v_name);
+                $v_dbm_rw->setActionGiver ($v_id, $v_giver_id);
+                $v_dbm_rw->setActionReceiver ($v_id, $v_receiver_id);
+
+                unset ($v_receiver_id);
+                unset ($v_name);
+                unset ($v_giver_id);
+                unset ($v_id);
+                unset ($v_dbm_rw);
+
+                header ('Location:?action=goto_actions');
+                break;
+            case 'do_action_delete':
+                if ($_SESSION ['logged_in_is_admin'] == 1) {
+                    $v_dbm_rw = new DBManagerRW ();
+                } else {
+                    array_push ($_SESSION ['error_messages'], "Actions deletion failed ! " . $_SESSION ['logged_in_username'] . " is not admin !");
+                    header ('Location:?action=goto_actions');
+                }
+
+                $v_id = intval (f_safe_read_array_item ($_POST, 'id'));
+
+                $v_dbm_rw->deleteAction ($v_id);
+
+                unset ($v_id);
+                unset ($v_dbm_rw);
+
+                header ('Location:?action=goto_actions');
+                break;
+            case 'do_action_delete':
+                if ($_SESSION ['logged_in_is_admin'] == 1) {
+                    $v_dbm_rw = new DBManagerRW ();
+                } else {
+                    array_push ($_SESSION ['error_messages'], "Actions deletion failed ! " . $_SESSION ['logged_in_username'] . " is not admin !");
+                    header ('Location:?action=goto_actions');
+                }
+
+                $v_id = intval (f_safe_read_array_item ($_POST, 'id'));
+
+                $v_dbm_rw->deleteAction ($v_id);
+
+                unset ($v_id);
+                unset ($v_dbm_rw);
+
+                header ('Location:?action=goto_actions');
+                break;
+            case 'do_action_assign_category':
+                $v_action_id = intval (f_safe_read_array_item ($_GET, 'action_id'));
+                $v_category_id = intval (f_safe_read_array_item ($_GET, 'category_id'));
+
+                if ($_SESSION ['logged_in_is_admin'] == 1) {
+                    $v_dbm_rw = new DBManagerRW ();
+                } else {
+                    array_push ($_SESSION ['error_messages'], "Actions category assignation failed ! " . $_SESSION ['logged_in_username'] . " is not admin !");
+                    header ('Location:?action=goto_action_category_edit&id=' . $v_action_id);
+                }
+
+                $v_dbm_rw->assignActionCategory ($v_action_id, $v_category_id);
+
+                unset ($v_category_id);
+                unset ($v_dbm_rw);
+
+                header ('Location:?action=goto_action_category_edit&id=' . $v_action_id);
+                break;
+            case 'do_action_unassign_category':
+                $v_action_id = intval (f_safe_read_array_item ($_GET, 'action_id'));
+                $v_category_id = intval (f_safe_read_array_item ($_GET, 'category_id'));
+
+                if ($_SESSION ['logged_in_is_admin'] == 1) {
+                    $v_dbm_rw = new DBManagerRW ();
+                } else {
+                    array_push ($_SESSION ['error_messages'], "Actions category de-assignation failed ! " . $_SESSION ['logged_in_username'] . " is not admin !");
+                    header ('Location:?action=goto_action_category_edit&id=' . $v_action_id);
+                }
+
+                $v_dbm_rw->unassignActionCategory ($v_action_id, $v_category_id);
+
+                unset ($v_category_id);
+                unset ($v_dbm_rw);
+
+                header ('Location:?action=goto_action_category_edit&id=' . $v_action_id);
+                break;
         }
     } else { // not loggued in
         switch ($v_action) {
@@ -345,68 +464,104 @@
         }
         $_SESSION ['error_messages'] = array ();
     }
-    switch ($v_action) {
-        case 'goto_login':
-            f_safe_require_once ('view/login.php');
-            break;
-        case 'goto_settings':
-            f_safe_require_once ('view/settings.php');
-            break;
-        case 'goto_users':
-            f_safe_require_once ('view/users.php');
-            break;
-        case 'goto_user_create':
-            f_safe_require_once ('view/user_create_edit.php');
-            break;
-        case 'goto_user_edit':
-            f_safe_require_once ('view/user_create_edit.php');
-            break;
-        case 'goto_user_update_password':
-            f_safe_require_once ('view/user_update_password.php');
-            break;
-        case 'goto_user_delete':
-            f_safe_require_once ('view/user_delete.php');
-            break;
-        case 'goto_persons':
-            f_safe_require_once ('view/persons.php');
-            break;
-        case 'goto_person_create':
-            f_safe_require_once ('view/person_create_edit.php');
-            break;
-        case 'goto_person_edit':
-            f_safe_require_once ('view/person_create_edit.php');
-            break;
-        case 'goto_person_delete':
-            f_safe_require_once ('view/person_delete.php');
-            break;
-        case 'goto_positions':
-            f_safe_require_once ('view/positions.php');
-            break;
-        case 'goto_position_create':
-            f_safe_require_once ('view/position_create_edit.php');
-            break;
-        case 'goto_position_edit':
-            f_safe_require_once ('view/position_create_edit.php');
-            break;
-        case 'goto_position_delete':
-            f_safe_require_once ('view/position_delete.php');
-            break;
-        case 'goto_categories':
-            f_safe_require_once ('view/categories.php');
-            break;
-        case 'goto_category_create':
-            f_safe_require_once ('view/category_create_edit.php');
-            break;
-        case 'goto_category_edit':
-            f_safe_require_once ('view/category_create_edit.php');
-            break;
-        case 'goto_category_delete':
-            f_safe_require_once ('view/category_delete.php');
-            break;
-        default:
-            f_safe_require_once ('view/main.php');
-            break;
+    define ("ACTION_PAGE", array ("goto_login"                => "view/login.php",
+                                  "goto_settings"             => "view/settings.php",
+                                  // Users
+                                  "goto_users"                => "view/users.php",
+                                  "goto_user_create"          => "view/user_create_edit.php",
+                                  "goto_user_edit"            => "view/user_create_edit.php",
+                                  "goto_user_update_password" => "view/user_update_password.php",
+                                  "goto_user_delete"          => "view/user_delete.php",
+                                  // Persons
+                                  "goto_persons"              => "view/persons.php",
+                                  "goto_person_create"        => "view/person_create_edit.php",
+                                  "goto_person_edit"          => "view/person_create_edit.php",
+                                  "goto_person_delete"        => "view/person_delete.php",
+                                  // Positions
+                                  "goto_positions"            => "view/positions.php",
+                                  "goto_position_create"      => "view/position_create_edit.php",
+                                  "goto_position_edit"        => "view/position_create_edit.php",
+                                  "goto_position_delete"      => "view/position_delete.php",
+                                  // Categories
+                                  "goto_categories"           => "view/categories.php",
+                                  "goto_category_create"      => "view/category_create_edit.php",
+                                  "goto_category_edit"        => "view/category_create_edit.php",
+                                  "goto_category_delete"      => "view/category_delete.php",
+                                  // Actions
+                                  "goto_actions"              => "view/actions.php",
+                                  "goto_action_create"        => "view/action_create_edit.php",
+                                  "goto_action_edit"          => "view/action_create_edit.php",
+                                  "goto_action_category_edit" => "view/action_category_edit.php",
+                                  "goto_action_delete"        => "view/action_delete.php",
+                                 ));
+    if (!isset (ACTION_PAGE [$v_action])) {
+        $v_page = "view/main.php";
+    } else {
+        $v_page = ACTION_PAGE [$v_action];
     }
+    f_safe_require_once ($v_page);
+    // switch ($v_action) {
+    //     case 'goto_login':
+    //         f_safe_require_once ('view/login.php');
+    //         break;
+    //     case 'goto_settings':
+    //         f_safe_require_once ('view/settings.php');
+    //         break;
+    //     case 'goto_users':
+    //         f_safe_require_once ('view/users.php');
+    //         break;
+    //     case 'goto_user_create':
+    //         f_safe_require_once ('view/user_create_edit.php');
+    //         break;
+    //     case 'goto_user_edit':
+    //         f_safe_require_once ('view/user_create_edit.php');
+    //         break;
+    //     case 'goto_user_update_password':
+    //         f_safe_require_once ('view/user_update_password.php');
+    //         break;
+    //     case 'goto_user_delete':
+    //         f_safe_require_once ('view/user_delete.php');
+    //         break;
+    //     case 'goto_persons':
+    //         f_safe_require_once ('view/persons.php');
+    //         break;
+    //     case 'goto_person_create':
+    //         f_safe_require_once ('view/person_create_edit.php');
+    //         break;
+    //     case 'goto_person_edit':
+    //         f_safe_require_once ('view/person_create_edit.php');
+    //         break;
+    //     case 'goto_person_delete':
+    //         f_safe_require_once ('view/person_delete.php');
+    //         break;
+    //     case 'goto_positions':
+    //         f_safe_require_once ('view/positions.php');
+    //         break;
+    //     case 'goto_position_create':
+    //         f_safe_require_once ('view/position_create_edit.php');
+    //         break;
+    //     case 'goto_position_edit':
+    //         f_safe_require_once ('view/position_create_edit.php');
+    //         break;
+    //     case 'goto_position_delete':
+    //         f_safe_require_once ('view/position_delete.php');
+    //         break;
+    //     case 'goto_categories':
+    //         f_safe_require_once ('view/categories.php');
+    //         break;
+    //     case 'goto_category_create':
+    //         f_safe_require_once ('view/category_create_edit.php');
+    //         break;
+    //     case 'goto_category_edit':
+    //         f_safe_require_once ('view/category_create_edit.php');
+    //         break;
+    //     case 'goto_category_delete':
+    //         f_safe_require_once ('view/category_delete.php');
+    //         break;
+    //     default:
+    //         f_safe_require_once ('view/main.php');
+    //         break;
+    // }
 
     echo ('<div style="margin-top:10em;"/>');
     display_dbg ();

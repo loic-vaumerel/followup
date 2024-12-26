@@ -17,7 +17,7 @@
             <input type="submit" value="Data Types - Actions">
         </form>
         <form method="post" action="?action=goto_categories">
-            <input type="submit" value="Data Types - Category">
+            <input type="submit" value="Data Types - Categories">
         </form>
         <form method="post" action="?action=goto_positions">
             <input type="submit" value="Data Types - Positions">
