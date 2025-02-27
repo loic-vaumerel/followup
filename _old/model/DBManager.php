@@ -1,6 +1,6 @@
 <?php
   declare (strict_types = 1);
-  if (!isset ($_SESSION ["NO_DIRECT_ACCESS"])) exit (0);
+  if (!isset ($GLOBALS ['SAFE_REQUIRE_ONCE'])) exit (0);
 
   class DBManager {
     private $iv_db_connection = null;

@@ -1,0 +1,8 @@
+php -r 'echo ("\ndelete from followup.user where id = 1;\n");'
+php -r '$v_password="CHANGE_ME"; echo ("\ninsert into followup.user values (1, " . chr (39) . "admin" . chr (39) . ", null, " . chr (39) . password_hash ($v_password, PASSWORD_DEFAULT) . chr (39) . ", 1, 1);\n\n");'
+
+https://onlinephp.io/
+
+echo ("delete from followup.user where id = 1;\n");
+$v_password="CHANGE_ME";
+echo ("insert into followup.user values (1, " . chr (39) . "admin" . chr (39) . ", null, " . chr (39) . password_hash ($v_password, PASSWORD_DEFAULT) . chr (39) . ", 1, 1);\n");

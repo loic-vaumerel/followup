@@ -1,7 +1,5 @@
 drop database if exists followup;
 drop user if exists web_followup;
-drop user if exists followup_ro;
-drop user if exists followup_rw;
 
 create user if not exists followup_ro identified by 'password';
 create user if not exists followup_rw identified by 'password';
