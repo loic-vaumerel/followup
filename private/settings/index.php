@@ -7,7 +7,7 @@
     unset ($_SESSION ["NO_DIRECT_ACCESS"]);
 ?>
 
-<a href="logout.php">Logout</a>
+<a href="../logout.php">Logout</a>
 <a href="..">Index</a>
 
 <?php

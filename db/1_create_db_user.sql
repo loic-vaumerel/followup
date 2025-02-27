@@ -14,5 +14,3 @@ show databases;
 select * from mysql.user;
 show grants for followup_ro;
 show grants for followup_rw;
-
-
