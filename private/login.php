@@ -3,7 +3,6 @@
 
     $_SESSION ["NO_DIRECT_ACCESS"] = "ok";
     require ("./tools/init.php");
-    // require ("./model/DBManagerRO.php");
     require ("settings/db.php");
     require ("../model/DBManager.php");
     require ("../model/DBManagerRO.php");
@@ -28,19 +27,7 @@
                 unset ($_SESSION ["logged_in"]);
             }
         }
-        // echo ("<pre>"); print_r($v_dbm_ro->readUserByName ("admin")[0]); echo ("</pre>");
-        // echo "<div>$v_post_username</div>";
-        // echo "<div>$v_post_password</div>";
-        // echo ("<pre>"); print_r(f_safe_array_read ($v_dbm_ro->readUserByName ("username"), 0)); echo ("</pre>");
-        // echo ("<pre>"); print_r(f_safe_array_read ($v_dbm_ro->readUserByName ("ksdhds"), 0)); echo ("</pre>");
     }
-    
-    // elseif (f_safe_array_read ($_POST, "username") == "username" && f_safe_array_read ($_POST, "password") == "password") {
-    //     $_SESSION ["logged_in"] = "true";
-    //     header ("Location:index.php");
-    // } else {
-    //     unset ($_SESSION ["logged_in"]);
-    // }
 ?>
 
 <form method="post" action="">

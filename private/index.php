@@ -10,7 +10,4 @@
 <a href="logout.php">Logout</a>
 <a href="settings">Settings</a>
 
-<?php
-?>
-
 <?php require ("../dev/display_globals.php"); ?>
