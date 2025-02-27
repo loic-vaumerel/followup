@@ -1,1 +1,2 @@
 - prevent download of files in db folder
+- test if <?php if (!isset ($_SESSION ["NO_DIRECT_ACCESS"])) exit (0); ?> is zorking when no session is started
